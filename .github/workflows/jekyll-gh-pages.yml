@@ -14,6 +14,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -38,6 +39,22 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
+      - name: Deduplicate Pages artifacts
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const run_id = context.runId;
+            const response = await github.rest.actions.listWorkflowRunArtifacts({ owner, repo, run_id });
+            const pagesArtifacts = response.data.artifacts.filter((artifact) => artifact.name === 'github-pages');
+
+            if (pagesArtifacts.length > 1) {
+              console.log(`Found ${pagesArtifacts.length} Pages artifacts. Removing duplicates.`);
+              for (const artifact of pagesArtifacts.slice(1)) {
+                await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: artifact.id });
+              }
+            }
+
   # Deployment job
   deploy:
     environment:
@@ -49,3 +66,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          artifact_name: github-pages
