@@ -4,9 +4,13 @@ title: Home
 permalink: /
 ---
 
+<img src="/assets/images/profile.jpg" alt="Hossam Emad" class="profile-photo">
+
 # Embedded Systems Engineer
 
 I design and deliver reliable embedded hardware and firmware solutions for automotive and industrial applications. My work spans board design, firmware development, debugging, production support, and continuous improvement across the full product lifecycle.
+
+<a class="resume-download" href="/assets/resume/resume.pdf" target="_blank">Download Resume (PDF)</a>
 
 ## What I bring
 
@@ -30,3 +34,7 @@ I design and deliver reliable embedded hardware and firmware solutions for autom
 - Contributed to design decisions across schematic capture, layout, bring-up, and testing
 
 Explore my [experience](/experience/) and [projects](/projects/) to see how I apply these skills in practice.
+
+---
+
+**To customize:** replace `/assets/images/profile.jpg` with your own headshot (same filename, or update the path above).
