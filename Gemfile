@@ -8,7 +8,7 @@ source "https://rubygems.org"
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
 gem "jekyll", "~> 4.4.1"
-gem "minima", "~> 2.5"
+gem "jekyll-theme-hacker"
 gem "webrick", "~> 1.8"
 
 # If you have any plugins, put them here!

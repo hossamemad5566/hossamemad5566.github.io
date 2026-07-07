@@ -24,8 +24,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   Embedded Systems Engineer with 2+ years of hands-on experience in hardware design, PCB layout, firmware
   development, and production support. Experienced in automotive and industrial IoT systems, 4-layer
   high-speed PCB design, EMI mitigation, controlled impedance routing, BMS, and RTOS-based firmware.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/hossamemad5566.github.io" # the subpath of your site, e.g. /blog
+url: "https://hossamemad5566.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 linkedin_username: hossamemad5566
 github_username: hossamemad5566
 header_pages:
