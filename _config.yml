@@ -35,7 +35,7 @@ header_pages:
   - contact.markdown
 
 # Build settings
-theme: minima
+theme: jekyll-theme-hacker
 plugins:
   - jekyll-feed
 
