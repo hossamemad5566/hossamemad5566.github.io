@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { featuredProjects } from '../data/projects';
+---
+
+<Layout>
+  <main>
+    <section class="mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+        <div>
+          <p class="text-sm uppercase tracking-[0.35em] text-sky-300">Embedded Hardware Engineering</p>
+          <h1 class="mt-4 text-4xl font-semibold leading-tight text-white sm:text-6xl">Designing reliable electronics from concept to production.</h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+            I build embedded systems, PCB layouts, firmware, and production-ready hardware for industrial, automotive, and IoT applications.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#projects" class="rounded-full bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:bg-sky-400">View Projects</a>
+            <a href="/resume" class="rounded-full border border-white/15 px-6 py-3 font-medium text-slate-200 transition hover:bg-white/10">Download Resume</a>
+          </div>
+        </div>
+        <div class="rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-2xl shadow-slate-950/50">
+          <h2 class="text-2xl font-semibold text-white">Engineering focus</h2>
+          <ul class="mt-6 space-y-3 text-slate-300">
+            <li>• PCB design and signal integrity</li>
+            <li>• Embedded firmware and RTOS</li>
+            <li>• Battery management and power electronics</li>
+            <li>• Industrial IoT and automotive electronics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="border-t border-white/10">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <p class="text-sm uppercase tracking-[0.3em] text-sky-300">About</p>
+        <h2 class="section-heading">Professional engineering profile</h2>
+        <p class="section-copy">
+          I combine hardware design, firmware delivery, and manufacturing awareness to create dependable electronic products from first prototypes through production-ready systems.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills" class="border-t border-white/10">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <p class="text-sm uppercase tracking-[0.3em] text-sky-300">Skills</p>
+        <h2 class="section-heading">Core capabilities</h2>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {['PCB Design', 'Embedded C', 'FreeRTOS', 'Signal Integrity', 'BMS', 'CAN', 'ESP32', 'STM32'].map((skill) => (
+            <div class="rounded-2xl border border-white/10 bg-slate-900/70 p-6 text-slate-200">{skill}</div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="border-t border-white/10">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <p class="text-sm uppercase tracking-[0.3em] text-sky-300">Projects</p>
+        <h2 class="section-heading">Featured engineering case studies</h2>
+        <div class="mt-8 grid gap-6 lg:grid-cols-3">
+          {featuredProjects.map((project) => (
+            <article class="rounded-3xl border border-white/10 bg-slate-900/70 p-6 shadow-lg shadow-slate-950/30">
+              <h3 class="text-xl font-semibold text-white">{project.title}</h3>
+              <p class="mt-4 text-slate-300">{project.summary}</p>
+              <div class="mt-6 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span class="rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-1 text-sm text-sky-200">{tag}</span>
+                ))}
+              </div>
+              <a href={project.href} class="mt-6 inline-flex text-sm font-medium text-sky-300 transition hover:text-sky-200">Read case study →</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="border-t border-white/10">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <p class="text-sm uppercase tracking-[0.3em] text-sky-300">Timeline</p>
+        <h2 class="section-heading">Career progression</h2>
+        <div class="mt-8 space-y-5 rounded-3xl border border-white/10 bg-slate-900/70 p-8">
+          <div>
+            <p class="font-semibold text-white">2022 — Graduation</p>
+            <p class="mt-2 text-slate-300">Completed studies with a strong foundation in electronics, embedded systems, and practical engineering.</p>
+          </div>
+          <div>
+            <p class="font-semibold text-white">2023 — NTI</p>
+            <p class="mt-2 text-slate-300">Built hands-on experience in embedded systems and production-oriented development workflows.</p>
+          </div>
+          <div>
+            <p class="font-semibold text-white">2024 — SEITech</p>
+            <p class="mt-2 text-slate-300">Expanded into hardware design, firmware, and interdisciplinary engineering delivery.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
