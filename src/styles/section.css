@@ -1,19 +1,19 @@
 section {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 88px 24px;
+  padding: 96px 24px;
 }
 
 .section-heading {
-  font-size: 2rem;
+  font-size: clamp(1.7rem, 2.2vw, 2.35rem);
   font-weight: 700;
   margin-bottom: 1rem;
   color: #f8fbff;
 }
 
 .section-copy {
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: 1.05rem;
+  line-height: 1.9;
   color: #9fb0c7;
-  max-width: 720px;
+  max-width: 760px;
 }
