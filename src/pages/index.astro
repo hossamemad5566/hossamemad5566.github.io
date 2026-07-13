@@ -6,12 +6,12 @@ import { featuredProjects } from '../data/projects';
 <Layout>
   <main>
     <section class="mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
-      <div class="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+      <div class="grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
         <div class="max-w-3xl">
           <p class="text-sm font-semibold uppercase tracking-[0.35em] text-sky-300">Embedded Hardware Engineering</p>
-          <h1 class="mt-5 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl">Designing reliable electronics from concept to production.</h1>
+          <h1 class="mt-5 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl">Designing dependable electronics from concept to production.</h1>
           <p class="mt-6 text-lg leading-8 text-slate-300 sm:text-xl">
-            I build embedded systems, PCB layouts, firmware, and production-ready hardware for industrial, automotive, and IoT applications.
+            I develop embedded systems, PCB layouts, firmware, and production-ready hardware for industrial, automotive, and IoT applications.
           </p>
           <div class="mt-8 flex flex-wrap gap-4">
             <a href="#projects" class="rounded-full bg-sky-500 px-6 py-3 font-medium text-slate-950 transition hover:-translate-y-0.5 hover:bg-sky-400">View Projects</a>
@@ -22,24 +22,28 @@ import { featuredProjects } from '../data/projects';
           <img src="/images/hero/pcb-hero.png" alt="PCB hardware layout" class="h-72 w-full object-cover" />
           <div class="p-8">
             <h2 class="text-2xl font-semibold text-white">Engineering focus</h2>
-            <ul class="mt-6 space-y-3 text-slate-300">
-              <li>• PCB design and signal integrity</li>
-              <li>• Embedded firmware and RTOS</li>
-              <li>• Battery management and power electronics</li>
-              <li>• Industrial IoT and automotive electronics</li>
-            </ul>
+            <div class="mt-5 grid gap-3 text-slate-300 sm:grid-cols-2">
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">PCB design and signal integrity</div>
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">Embedded firmware and RTOS</div>
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">BMS and power electronics</div>
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">Industrial and automotive systems</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <section id="about" class="border-t border-white/10">
-      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <p class="text-sm uppercase tracking-[0.3em] text-sky-300">About</p>
-        <h2 class="section-heading">Professional engineering profile</h2>
-        <p class="section-copy">
-          I combine hardware design, firmware delivery, and manufacturing awareness to create dependable electronic products from first prototypes through production-ready systems.
-        </p>
+      <div class="mx-auto grid max-w-7xl gap-8 px-6 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+        <div>
+          <p class="text-sm uppercase tracking-[0.3em] text-sky-300">About</p>
+          <h2 class="section-heading">Professional engineering profile</h2>
+        </div>
+        <div class="rounded-[1.75rem] border border-white/10 bg-slate-900/60 p-8">
+          <p class="section-copy">
+            I combine hardware design, firmware delivery, and manufacturing awareness to create dependable electronic products from first prototypes through production-ready systems.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -47,7 +51,7 @@ import { featuredProjects } from '../data/projects';
       <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <p class="text-sm uppercase tracking-[0.3em] text-sky-300">Skills</p>
         <h2 class="section-heading">Core capabilities</h2>
-        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {['PCB Design', 'Embedded C', 'FreeRTOS', 'Signal Integrity', 'BMS', 'CAN', 'ESP32', 'STM32'].map((skill) => (
             <div class="rounded-2xl border border-white/10 bg-slate-900/70 p-6 text-slate-200">{skill}</div>
           ))}
@@ -85,16 +89,16 @@ import { featuredProjects } from '../data/projects';
       <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <p class="text-sm uppercase tracking-[0.3em] text-sky-300">Timeline</p>
         <h2 class="section-heading">Career progression</h2>
-        <div class="mt-8 space-y-5 rounded-3xl border border-white/10 bg-slate-900/70 p-8">
-          <div>
+        <div class="mt-8 space-y-5 rounded-[1.75rem] border border-white/10 bg-slate-900/70 p-8">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
             <p class="font-semibold text-white">2022 — Graduation</p>
             <p class="mt-2 text-slate-300">Completed studies with a strong foundation in electronics, embedded systems, and practical engineering.</p>
           </div>
-          <div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
             <p class="font-semibold text-white">2023 — NTI</p>
             <p class="mt-2 text-slate-300">Built hands-on experience in embedded systems and production-oriented development workflows.</p>
           </div>
-          <div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
             <p class="font-semibold text-white">2024 — SEITech</p>
             <p class="mt-2 text-slate-300">Expanded into hardware design, firmware, and interdisciplinary engineering delivery.</p>
           </div>
