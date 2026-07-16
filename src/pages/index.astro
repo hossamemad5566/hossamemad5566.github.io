@@ -1,6 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { featuredProjects } from '../data/projects';
+
+const skillGroups = [
+  {
+    label: 'Firmware & Software',
+    skills: ['Embedded C (production-grade)', 'FreeRTOS', 'Python (prototyping & validation)', 'SMS / MQTT / HTTP', 'GPS data processing', 'FOTA', 'Geofencing algorithms', 'Root-cause analysis'],
+  },
+  {
+    label: 'Hardware & PCB',
+    skills: ['Multi-layer PCB design (up to 4 layers)', 'Stackup planning & controlled impedance (USB, CAN, RF)', 'EMI mitigation', 'RF subsystem design', 'Battery Management Systems (3-cell)', 'Board bring-up & field debugging', 'Gerber / BOM / CPL preparation', 'Fab coordination (JLCPCB)'],
+  },
+  {
+    label: 'Protocols & Interfaces',
+    skills: ['CAN (High-Speed, SWCAN)', 'USB', 'UART / SPI / I²C', 'RS232 / RS485', 'Wi-Fi / BLE', '4G (SIMCom)', 'ADC / GPIO'],
+  },
+  {
+    label: 'Tools',
+    skills: ['Altium Designer', 'KiCad', 'EAGLE', 'EasyEDA Pro', 'Autodesk Fusion 360', 'LTspice'],
+  },
+];
+
+const timeline = [
+  {
+    period: 'Jul 2024 — Present',
+    title: 'Embedded Systems Engineer',
+    org: 'SEITech Solutions (Acquired by T&S Group), Smart Village, Cairo',
+    body: 'Own full product lifecycle — concept through manufacturing and deployment — across SEIFence IoT trackers, ForWheelz automotive telematics, the SEITech Box industrial gateway and BMS, an Ethernet/RS485 access control board, a Wi-Fi smart switch, and an STM32F407 + ESP32-S3 industrial IoT controller platform.',
+  },
+  {
+    period: 'Jan 2024 — Feb 2024',
+    title: 'Embedded Systems Engineer (Short-term contract)',
+    org: 'Noziqs Medical, Nasr City',
+    body: 'Developed embedded firmware for operating tables, improving system functionality by 30% and reducing device downtime by 20% through board-level troubleshooting and root-cause analysis.',
+  },
+  {
+    period: 'Feb 2024 — Jul 2024',
+    title: 'Automotive Embedded Systems Diploma',
+    org: 'NTI, New Capital',
+    body: 'Embedded C, RTOS, STM32 & AVR, CAN/LIN/UART/SPI/I2C, bootloader/FOTA, automotive testing, and project management — graduation project: a custom STM32F407 + ESP32-S3 industrial IoT controller platform.',
+  },
+  {
+    period: 'Sep 2017 — Jul 2022',
+    title: 'B.Sc. Electronics and Control Engineering',
+    org: 'Menoufia University — Grade: Very Good',
+    body: 'Built the analog/digital electronics and control-systems foundation for a career in embedded hardware, going on to complete the NTI Automotive Embedded Systems Diploma before transitioning to industry.',
+  },
+];
 ---
 
 <Layout>
@@ -8,14 +54,19 @@ import { featuredProjects } from '../data/projects';
     <section class="mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
       <div class="grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
         <div class="max-w-3xl">
-          <p class="text-base font-semibold uppercase tracking-[0.35em] text-sky-300">Embedded Systems / Hardware Engineering</p>
-          <h1 class="mt-5 text-5xl font-semibold leading-[1.05] text-white sm:text-6xl lg:text-7xl">Designing reliable electronics from prototype to production.</h1>
+          <p class="text-base font-semibold uppercase tracking-[0.35em] text-sky-300">Embedded Systems / Hardware Engineer</p>
+          <h1 class="mt-5 text-5xl font-semibold leading-[1.05] text-white sm:text-6xl lg:text-7xl">Designing dependable electronics from concept to production.</h1>
           <p class="mt-6 text-2xl leading-9 text-slate-200 sm:text-[1.65rem]">
-            I build embedded hardware, PCB layouts, and firmware for industrial automation, automotive telematics, and IoT products with a strong focus on field reliability.
+            2+ years turning field problems into shipped hardware — 4-layer PCB design, RTOS firmware, EMI mitigation, and BMS for automotive and industrial IoT systems, with full lifecycle ownership from concept through manufacturing and deployment.
           </p>
           <div class="mt-8 flex flex-wrap gap-4">
             <a href="#projects" class="rounded-full bg-sky-500 px-8 py-4 text-xl font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-sky-400">View Projects</a>
-            <a href="/Hossam_Emad_Mohamed_Osman_Detailed_CV.pdf" class="rounded-full border border-white/15 px-8 py-4 text-xl font-semibold text-slate-200 transition hover:-translate-y-0.5 hover:bg-white/10">Download CV</a>
+            <a href="/resume" class="rounded-full border border-white/15 px-8 py-4 text-xl font-semibold text-slate-200 transition hover:-translate-y-0.5 hover:bg-white/10">Download Resume</a>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-base text-slate-300">
+            <span>Giza, Egypt</span>
+            <a href="mailto:hossam.emad.5566@gmail.com" class="transition hover:text-sky-300">hossam.emad.5566@gmail.com</a>
+            <a href="tel:+201015891738" class="transition hover:text-sky-300">+20 101 589 1738</a>
           </div>
         </div>
         <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/70 shadow-[0_20px_80px_rgba(2,6,23,0.55)]">
@@ -23,10 +74,10 @@ import { featuredProjects } from '../data/projects';
           <div class="p-8">
             <h2 class="text-3xl font-semibold text-white">Engineering focus</h2>
             <div class="mt-5 grid gap-3 text-lg text-slate-200 sm:grid-cols-2">
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">4-layer PCB design and controlled impedance routing</div>
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">Embedded firmware and RTOS-based product development</div>
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">BMS and power electronics validation</div>
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">Industrial and automotive hardware delivery</div>
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">4-layer PCB & signal integrity</div>
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">RTOS firmware (FreeRTOS)</div>
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">BMS & power electronics</div>
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">Automotive & industrial IoT</div>
             </div>
           </div>
         </div>
@@ -41,7 +92,7 @@ import { featuredProjects } from '../data/projects';
         </div>
         <div class="rounded-[1.75rem] border border-white/10 bg-slate-900/60 p-8">
           <p class="section-copy">
-            I combine hardware design, firmware delivery, and manufacturing awareness to create dependable electronic products from first prototypes through production-ready systems, with hands-on experience supporting deployed devices and resolving field issues.
+            Embedded Systems Engineer with 2+ years of hands-on experience in hardware design, PCB layout, firmware development, and production support. I independently identify field issues, propose solutions, and deliver improved hardware and firmware revisions end-to-end — with experience across automotive and industrial IoT systems, 4-layer high-speed PCB design, EMI mitigation, controlled impedance routing, BMS, and RTOS-based firmware, owning the full product lifecycle from concept through manufacturing and deployment.
           </p>
         </div>
       </div>
@@ -51,9 +102,16 @@ import { featuredProjects } from '../data/projects';
       <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <p class="text-sm uppercase tracking-[0.3em] text-sky-300">Skills</p>
         <h2 class="section-heading">Core capabilities</h2>
-        <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {['PCB Design', 'Embedded C', 'FreeRTOS', 'Signal Integrity', 'BMS', 'CAN', 'ESP32', 'STM32'].map((skill) => (
-            <div class="rounded-2xl border border-white/10 bg-slate-900/70 p-6 text-lg font-medium text-slate-100">{skill}</div>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          {skillGroups.map((group) => (
+            <div class="rounded-[1.5rem] border border-white/10 bg-slate-900/70 p-6">
+              <h3 class="text-xl font-semibold text-sky-300">{group.label}</h3>
+              <div class="mt-4 flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <span class="rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-base font-medium text-slate-100">{skill}</span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -90,18 +148,14 @@ import { featuredProjects } from '../data/projects';
         <p class="text-sm uppercase tracking-[0.3em] text-sky-300">Timeline</p>
         <h2 class="section-heading">Career progression</h2>
         <div class="mt-8 space-y-5 rounded-[1.75rem] border border-white/10 bg-slate-900/70 p-8">
-          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <p class="text-xl font-semibold text-white">2017 — 2022 — Bachelor of Electronics and Control Engineering</p>
-            <p class="mt-2 text-lg leading-8 text-slate-200">Completed studies at Menoufia University with a very good grade and a strong foundation in electronics, control, and embedded systems.</p>
-          </div>
-          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <p class="text-xl font-semibold text-white">2024 — Automotive Embedded Systems Diploma at NTI</p>
-            <p class="mt-2 text-lg leading-8 text-slate-200">Built advanced experience in embedded C, RTOS, automotive communication protocols, and hands-on development workflows.</p>
-          </div>
-          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <p class="text-xl font-semibold text-white">2024 — Present — Embedded Systems Engineer at SEITech</p>
-            <p class="mt-2 text-lg leading-8 text-slate-200">Delivering hardware design, firmware development, production support, and field troubleshooting for industrial and IoT products.</p>
-          </div>
+          {timeline.map((item) => (
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-300">{item.period}</p>
+              <p class="mt-2 text-xl font-semibold text-white">{item.title}</p>
+              <p class="mt-1 text-base font-medium text-slate-400">{item.org}</p>
+              <p class="mt-3 text-lg leading-8 text-slate-200">{item.body}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
