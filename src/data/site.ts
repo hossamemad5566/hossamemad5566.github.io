@@ -3,7 +3,7 @@
 // Free, privacy-friendly visitor counter (https://www.goatcounter.com).
 // Create a free account, then put your site code here, e.g. 'hossamemad'.
 // Leave empty to disable analytics.
-export const goatcounterCode = '';
+export const goatcounterCode = 'hossamemad';
 
 export const contact = {
   email: 'hossam.emad.5566@gmail.com',
