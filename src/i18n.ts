@@ -87,6 +87,8 @@ export const ui = {
     emailMe: 'Email me',
     messageLinkedIn: 'Message on LinkedIn',
     resume: 'Resume',
+    portfolioPdf: 'Portfolio (PDF)',
+    portfolioFile: '/Hossam_Emad_Portfolio.pdf',
     contactMeta: 'Giza, Egypt',
     // project page
     allProjects: '← All projects',
@@ -175,6 +177,8 @@ export const ui = {
     emailMe: 'راسلني بالبريد',
     messageLinkedIn: 'راسلني على LinkedIn',
     resume: 'السيرة الذاتية',
+    portfolioPdf: 'معرض الأعمال (PDF)',
+    portfolioFile: '/Hossam_Emad_Portfolio_AR.pdf',
     contactMeta: 'الجيزة، مصر',
     allProjects: '→ كل المشاريع',
     myRole: 'دوري',

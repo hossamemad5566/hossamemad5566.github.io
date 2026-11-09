@@ -29,6 +29,12 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Install Chromium for PDF export
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate portfolio PDFs (EN + AR)
+        run: npm run pdf
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

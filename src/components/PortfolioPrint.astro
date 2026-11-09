@@ -1,0 +1,176 @@
+---
+// Print layout used to generate the downloadable portfolio PDF (A4, light theme).
+import { featuredProjects, allProjects } from '../data/projects';
+import { localizeProject } from '../data/projects.ar';
+import { contact, metrics, certifications, lab } from '../data/site';
+import { skillGroups, experience, education, metricsAr, labAr } from '../data/home';
+import { getLang, t } from '../i18n';
+
+const lang = getLang(Astro.url);
+const T = t(lang);
+const ar = lang === 'ar';
+const projects = featuredProjects.map((p) => localizeProject(p, lang));
+const switchProject = localizeProject(allProjects.find((p) => p.slug === 'smart-wifi-switch')!, lang);
+const stats = ar ? metricsAr : metrics;
+const labItems = ar ? labAr : lab;
+const site = 'hossamemad5566.github.io' + (ar ? '/ar' : '');
+const L = ar
+  ? { portfolio: 'معرض الأعمال', summary: 'نبذة', skills: 'المهارات', projects: 'المشاريع', role: 'دوري', outcome: 'النتيجة', specs: 'المواصفات', lab: 'مشاريع شخصية', exp: 'الخبرات', edu: 'التعليم', certs: 'الشهادات', contact: 'للتواصل', online: 'النسخة الكاملة على الإنترنت', note: 'تُعرض مشاريع الشركة في صورة مخططات كتلية مبسّطة.' }
+  : { portfolio: 'Portfolio', summary: 'Summary', skills: 'Skills', projects: 'Projects', role: 'My role', outcome: 'Outcome', specs: 'Key specs', lab: 'Personal projects', exp: 'Experience', edu: 'Education', certs: 'Certifications', contact: 'Contact', online: 'Full version online', note: 'Company projects are shown as simplified block diagrams.' };
+---
+
+<!doctype html>
+<html lang={lang} dir={ar ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{T.name} — {L.portfolio}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style is:global>
+      @page { size: A4; margin: 14mm 14mm 16mm; }
+      * { box-sizing: border-box; }
+      html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { margin: 0; font-family: Inter, sans-serif; color: #1b2a3a; font-size: 10pt; line-height: 1.5; }
+      [dir='rtl'] body { font-family: 'IBM Plex Sans Arabic', Inter, sans-serif; line-height: 1.55; font-size: 9.6pt; }
+      h1, h2, h3 { font-family: 'Space Grotesk', Inter, sans-serif; color: #0a1a2b; margin: 0; line-height: 1.2; }
+      [dir='rtl'] h1, [dir='rtl'] h2, [dir='rtl'] h3 { font-family: 'IBM Plex Sans Arabic', Inter, sans-serif; }
+      p { margin: 0; }
+      .page { page-break-after: always; break-after: page; }
+      .page:last-child { page-break-after: auto; break-after: auto; }
+      .cover { background: #0a1a2b; color: #f2f6fa; border-radius: 10px; padding: 26px 28px; position: relative; overflow: hidden; }
+      .cover h1 { color: #fff; font-size: 30pt; letter-spacing: 0.5px; }
+      .cover .role { color: #5fd4e8; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 15pt; font-weight: 500; margin-top: 4px; }
+      [dir='rtl'] .cover .role { font-family: inherit; }
+      .cover .tag { color: #c9d6e2; margin-top: 8px; font-size: 10.5pt; }
+      .cover .meta { color: #9fb3c8; margin-top: 14px; font-size: 9pt; }
+      .cover svg { position: absolute; inset-inline-end: 0; top: 0; opacity: 0.55; }
+      .metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0 4px; }
+      .metric { border: 1px solid #d5e3ee; border-radius: 8px; padding: 9px 10px; }
+      .metric b { display: block; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 15pt; color: #1a8094; }
+      .metric span { font-size: 8pt; color: #4a5d70; line-height: 1.3; display: block; }
+      h2.sec { font-size: 12.5pt; color: #1a8094; text-transform: uppercase; letter-spacing: 0.12em; margin: 16px 0 7px; padding-bottom: 4px; border-bottom: 1.5px solid #5fd4e8; }
+      [dir='rtl'] h2.sec { letter-spacing: 0; text-transform: none; }
+      .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+      .skills p { font-size: 9pt; }
+      .skills b { color: #0a1a2b; }
+      .project { break-inside: avoid; page-break-inside: avoid; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid #e3ebf2; }
+      .project:last-child { border-bottom: 0; }
+      .project img { width: 100%; border-radius: 6px; display: block; }
+      .lab-img { max-height: 135px; object-fit: cover; }
+      .project .cat { font-size: 8pt; color: #1a8094; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+      [dir='rtl'] .project .cat { letter-spacing: 0; }
+      .project h3 { font-size: 12pt; margin: 3px 0 5px; }
+      .project .sum { font-size: 9pt; color: #33475b; }
+      .project dl { margin: 7px 0 0; font-size: 8.5pt; }
+      .project dl div { display: grid; grid-template-columns: 26% 74%; gap: 6px; padding: 2px 0; }
+      .project dt { color: #6a7d90; }
+      .project dd { margin: 0; color: #1b2a3a; }
+      .project .role { margin-top: 6px; font-size: 8.8pt; }
+      .project .role b { color: #0a1a2b; }
+      .tl { display: grid; gap: 9px; }
+      .tl .when { font-size: 8pt; color: #1a8094; font-weight: 600; }
+      .tl b { color: #0a1a2b; }
+      .tl .org { color: #6a7d90; font-size: 8.5pt; }
+      .tl p.body { font-size: 9pt; margin-top: 2px; }
+      .two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+      .certs li { margin-bottom: 4px; font-size: 9pt; }
+      .certs a { color: #1a8094; text-decoration: none; }
+      ul { margin: 0; padding-inline-start: 16px; }
+      .contact { background: #ecfbfe; border: 1px solid #b8f1fa; border-radius: 8px; padding: 12px 14px; margin-top: 14px; font-size: 9.5pt; }
+      .contact a { color: #0a1a2b; font-weight: 600; text-decoration: none; }
+      .note { font-size: 8pt; color: #6a7d90; margin-top: -2px; margin-bottom: 4px; }
+      .ltr { direction: ltr; unicode-bidi: isolate; }
+    </style>
+  </head>
+  <body>
+    <!-- Page 1: cover, summary, skills -->
+    <section class="page">
+      <div class="cover">
+        <svg width="360" height="170" viewBox="0 0 360 170" fill="none" aria-hidden="true"><g stroke="#2D6A8E" stroke-width="2.5"><path d="M360 30H260l-24 24h-80"/><path d="M360 90H280l-24-24h-60"/><path d="M360 140H250l-20 20h-70"/></g><g fill="#0A1A2B" stroke="#5FD4E8" stroke-width="2"><circle cx="156" cy="54" r="5"/><circle cx="196" cy="66" r="5"/><circle cx="160" cy="160" r="5"/></g></svg>
+        <h1>{ar ? T.name : 'HOSSAM EMAD'}</h1>
+        <p class="role">{T.eyebrow}</p>
+        <p class="tag">{T.h1}</p>
+        <p class="meta"><span class="ltr">{contact.email}</span> · <span class="ltr">+20 10 15891738</span> · <span class="ltr">{site}</span> · <span class="ltr">linkedin.com/in/hossamemad5566</span></p>
+      </div>
+
+      <div class="metrics">
+        {stats.map((m) => (<div class="metric"><b class="ltr">{m.value}</b><span>{m.label}</span></div>))}
+      </div>
+
+      <h2 class="sec">{L.summary}</h2>
+      {T.aboutP.map((p) => <p style="margin-bottom:6px">{p}</p>)}
+
+      <h2 class="sec">{L.skills}</h2>
+      <div class="skills">
+        {skillGroups(lang).map((g) => (<p><b>{g.label}:</b> {g.skills.join(' · ')}</p>))}
+      </div>
+
+    </section>
+
+    <!-- Projects (3 per page) -->
+    {[0, 3].map((start, i) => (
+      <section class="page">
+        <h2 class="sec" style="margin-top:0">{L.projects}{i ? ` (${ar ? 'تابع' : 'cont.'})` : ''}</h2>
+        {i === 0 && <p class="note">{L.note}</p>}
+        {projects.slice(start, start + 3).map((p) => (
+          <article class="project">
+            <div><img src={p.images[0]} alt="" /></div>
+            <div>
+              <p class="cat">{p.category}</p>
+              <h3>{p.title}</h3>
+              <p class="sum">{p.summary}</p>
+              <dl>{p.specs.slice(0, 4).map((s) => (<div><dt>{s.label}</dt><dd>{s.value}</dd></div>))}</dl>
+              <p class="role"><b>{L.role}:</b> {p.role}</p>
+            </div>
+          </article>
+        ))}
+      </section>
+    ))}
+
+    <!-- Last page: lab, education, certifications, contact -->
+    <section class="page">
+      <h2 class="sec" style="margin-top:0">{L.lab}</h2>
+      <article class="project">
+        <div><img class="lab-img" src={switchProject.images[0]} alt="" /></div>
+        <div>
+          <p class="cat">{switchProject.category}</p>
+          <h3>{switchProject.title}</h3>
+          <p class="sum">{switchProject.summary}</p>
+          <dl>{switchProject.specs.slice(0, 4).map((s) => (<div><dt>{s.label}</dt><dd>{s.value}</dd></div>))}</dl>
+        </div>
+      </article>
+      {labItems.filter((x) => !x.href).map((x) => (
+        <p style="margin-top:8px"><b>{x.title}</b> <span class="org" style="color:#1a8094">({x.status})</span> — {x.body}</p>
+      ))}
+
+      <h2 class="sec">{L.exp}</h2>
+      <div class="tl">
+        {experience(lang).map((e) => (
+          <div><p class="when">{e.period}</p><p><b>{e.title}</b> — <span class="org">{e.org}</span></p><p class="body">{e.body}</p></div>
+        ))}
+      </div>
+      <div class="two">
+        <div>
+          <h2 class="sec">{L.edu}</h2>
+          <div class="tl">
+            {education(lang).map((e) => (
+              <div><p class="when">{e.period}</p><p><b>{e.title}</b></p><p class="org">{e.org}</p>{e.body && <p class="body">{e.body}</p>}</div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 class="sec">{L.certs}</h2>
+          <ul class="certs ltr" style={ar ? 'text-align:right' : ''}>
+            {certifications.map((c) => (<li><a href={c.url}>{c.title}</a> — {c.org}, {c.date}</li>))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="contact">
+        <p><b>{L.contact}:</b> <a class="ltr" href={`mailto:${contact.email}`}>{contact.email}</a> · WhatsApp <a class="ltr" href="https://wa.me/201015891738">+20 10 15891738</a> · <a class="ltr" href={contact.linkedin}>linkedin.com/in/hossamemad5566</a></p>
+        <p style="margin-top:4px">{L.online}: <a class="ltr" href={`https://${site}`}>{site}</a></p>
+      </div>
+    </section>
+  </body>
+</html>
