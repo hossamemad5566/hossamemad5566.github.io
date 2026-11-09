@@ -1,4 +1,4 @@
-# Embedded Hardware Engineering Portfolio
+# Hossam Emad — Hardware Engineering Portfolio
 
 A professional Astro-based portfolio for showcasing embedded systems, PCB design, firmware, automotive electronics, and industrial IoT projects.
 
@@ -25,3 +25,8 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Notes
+- Live site: https://hossamemad5566.github.io
+- Company (SEITech) projects are shown with simplified block diagrams only (`public/images/projects/<slug>/diagram.svg`), not board photos, layouts or schematics.
+- Diagrams, the hero graphic and `public/og-image.png` (link-preview image) are generated, not photographed.

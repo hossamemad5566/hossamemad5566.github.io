@@ -4,7 +4,13 @@ import '../styles/section.css';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 
-const { title = 'Hossam Emad | Embedded Hardware Engineer' } = Astro.props;
+const {
+  title = 'Hossam Emad | Hardware Engineer — PCB, BMS & Embedded Firmware',
+  description = 'Hardware Engineer in Giza, Egypt: 4-layer PCB design, high-speed & RF layout, BMS, and FreeRTOS firmware for automotive and industrial IoT. Available for roles and freelance PCB design.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site);
 ---
 
 <!doctype html>
@@ -12,9 +18,24 @@ const { title = 'Hossam Emad | Embedded Hardware Engineer' } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Embedded hardware engineer portfolio showcasing PCB design, firmware, industrial IoT, and automotive electronics projects." />
-    <meta name="theme-color" content="#050816" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#050816" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hossam Emad" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
     <Navigation />

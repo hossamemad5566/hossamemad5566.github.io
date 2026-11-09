@@ -1,21 +1,38 @@
 ---
 const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Timeline', href: '#timeline' },
+  { label: 'About', href: '/#about' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Experience', href: '/#experience' },
   { label: 'Resume', href: '/resume' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact', href: '/#contact' },
 ];
 ---
 
 <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8" aria-label="Main">
     <a href="/" class="text-xl font-semibold uppercase tracking-[0.3em] text-sky-300">Hossam Emad</a>
     <div class="hidden items-center gap-7 md:flex">
       {links.map((link) => (
         <a href={link.href} class="text-base font-medium text-slate-200 transition hover:text-white">{link.label}</a>
       ))}
     </div>
+    <details class="relative md:hidden">
+      <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl border border-white/15 text-slate-200 [&::-webkit-details-marker]:hidden" aria-label="Open menu">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </summary>
+      <div class="absolute right-0 mt-3 w-56 rounded-2xl border border-white/10 bg-slate-950/95 p-2 shadow-2xl">
+        {links.map((link) => (
+          <a href={link.href} class="block rounded-xl px-4 py-3 text-base font-medium text-slate-200 hover:bg-white/10 hover:text-white">{link.label}</a>
+        ))}
+      </div>
+    </details>
   </nav>
 </header>
+
+<script>
+  // Close the mobile menu after a link is tapped.
+  document.querySelectorAll('header details a').forEach((a) =>
+    a.addEventListener('click', () => a.closest('details')?.removeAttribute('open')),
+  );
+</script>

@@ -2,6 +2,6 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://hossamemad.github.io',
+  site: 'https://hossamemad5566.github.io',
   integrations: [tailwind()],
 });
