@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { experience, education } from '../data/home';
+import { certifications } from '../data/site';
+import { getLang, t } from '../i18n';
+
+const lang = getLang(Astro.url);
+const T = t(lang);
+---
+
+<Layout title={T.resumeTitle}>
+  <main class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+    <section class="rounded-3xl border border-white/10 bg-ink-800/70 p-8">
+      <p class="eyebrow">{T.resumeEyebrow}</p>
+      <h1 class="mt-4 text-3xl font-bold text-white sm:text-4xl">{T.resumeH}</h1>
+      <p class="mt-6 max-w-3xl text-lg text-slate-300">{T.resumeP}</p>
+      <a href="/Hossam_Emad_Mohamed_Osman.pdf" download class="mt-8 inline-flex rounded-full bg-sky-400 px-6 py-3 text-base font-semibold text-ink-900 transition hover:bg-sky-300">{T.downloadCv}</a>
+    </section>
+
+    <section class="mt-10 grid gap-12 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-semibold text-white">{T.expH}</h2>
+        <ol class="mt-6 space-y-6 border-s border-ink-500/60 ps-6">
+          {experience(lang).map((item) => (
+            <li>
+              <p class="font-semibold text-white">{item.title}</p>
+              <p class="text-sm text-slate-400">{item.org} · {item.period}</p>
+              <p class="mt-1 text-[0.98rem]">{item.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div>
+        <h2 class="text-2xl font-semibold text-white">{T.resumeEduH}</h2>
+        <ol class="mt-6 space-y-6 border-s border-ink-500/60 ps-6">
+          {education(lang).map((item) => (
+            <li>
+              <p class="font-semibold text-white">{item.title}</p>
+              <p class="text-sm text-slate-400">{item.org} · {item.period}</p>
+            </li>
+          ))}
+          {certifications.map((c) => (
+            <li dir="ltr" class={lang === 'ar' ? 'text-right' : ''}>
+              <p class="font-semibold text-white">{c.title}</p>
+              <p class="text-sm text-slate-400">{c.org} · {c.date}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  </main>
+</Layout>

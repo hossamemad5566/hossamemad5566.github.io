@@ -4,19 +4,21 @@ import '../styles/section.css';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { goatcounterCode } from '../data/site';
+import { getLang, altPath, t } from '../i18n';
 
-const {
-  title = 'Hossam Emad | Hardware Engineer — PCB, BMS & Embedded Firmware',
-  description = 'Hardware Engineer in Giza, Egypt: 4-layer PCB design, high-speed & RF layout, BMS, and FreeRTOS firmware for automotive and industrial IoT. Available for roles and freelance PCB design.',
-  type = 'website',
-} = Astro.props;
+const lang = getLang(Astro.url);
+const T = t(lang);
+const { title = T.siteTitle, description = T.siteDescription, type = 'website' } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const other = new URL(altPath(Astro.url), Astro.site);
+const enUrl = lang === 'en' ? canonical : other;
+const arUrl = lang === 'ar' ? canonical : other;
 const ogImage = new URL('/og-image.png', Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,10 +26,14 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <meta name="description" content={description} />
     <meta name="theme-color" content="#071220" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="ar" href={arUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:type" content={type} />
-    <meta property="og:site_name" content="Hossam Emad" />
+    <meta property="og:site_name" content={T.name} />
+    <meta property="og:locale" content={lang === 'ar' ? 'ar_EG' : 'en_US'} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

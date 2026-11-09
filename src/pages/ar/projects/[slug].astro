@@ -1,0 +1,16 @@
+---
+import ProjectPage from '../../../components/ProjectPage.astro';
+import { allProjects } from '../../../data/projects';
+
+export function getStaticPaths() {
+  return allProjects.map((project, i) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      prev: allProjects[(i - 1 + allProjects.length) % allProjects.length],
+      next: allProjects[(i + 1) % allProjects.length],
+    },
+  }));
+}
+---
+<ProjectPage {...Astro.props} />

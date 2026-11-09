@@ -1,0 +1,251 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { featuredProjects } from '../data/projects';
+import { localizeProject } from '../data/projects.ar';
+import { notes } from '../data/notes';
+import { localizeNote } from '../data/notes.ar';
+import { contact, metrics, certifications, testimonials, lab } from '../data/site';
+import { skillGroups, experience, education, metricsAr, labAr } from '../data/home';
+import { getLang, lp, t, whatsappUrl } from '../i18n';
+
+const lang = getLang(Astro.url);
+const T = t(lang);
+const projects = featuredProjects.map((p) => localizeProject(p, lang));
+const stats = lang === 'ar' ? metricsAr : metrics;
+const labItems = lang === 'ar' ? labAr : lab;
+const latestNotes = [...notes].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map((n) => localizeNote(n, lang));
+const btn = 'inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition hover:-translate-y-0.5';
+---
+
+<Layout>
+  <main>
+    <!-- Hero -->
+    <section class="trace-bg">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-14 pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:pt-28">
+        <div class="reveal">
+          <p class="eyebrow">{T.eyebrow}</p>
+          <h1 class="mt-5 text-4xl font-bold text-white sm:text-5xl lg:text-[3.5rem]">{T.h1}</h1>
+          <p class="mt-6 max-w-2xl text-lg text-slate-300">{T.heroP}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#projects" class={`${btn} bg-sky-400 text-ink-900 hover:bg-sky-300`}>{T.viewProjects}</a>
+            <a href="#contact" class={`${btn} border border-white/15 text-slate-200 hover:bg-white/10`}>{T.workWithMe}</a>
+          </div>
+          <p class="mt-6 text-sm text-slate-400">{T.heroMeta}</p>
+        </div>
+        <div class="reveal overflow-hidden rounded-3xl border border-white/10 bg-ink-800/70">
+          <img src="/images/hero/circuit-hero.svg" alt="" class="h-56 w-full object-cover" />
+          <div class="grid grid-cols-2 gap-px bg-white/5 text-sm text-slate-200">
+            {T.focus.map((f) => <div class="bg-ink-800 p-4">{f}</div>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Numbers -->
+    <section aria-label={T.highlights} class="border-y border-white/10 bg-ink-900/50">
+      <dl class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-8 px-6 py-10 sm:grid-cols-3 lg:grid-cols-5 lg:px-8">
+        {stats.map((m) => (
+          <div class="reveal">
+            <dt class="sr-only">{m.label}</dt>
+            <dd class="font-display text-3xl font-bold text-sky-300" dir="ltr" style={lang === 'ar' ? 'text-align:right' : ''}>{m.value}</dd>
+            <dd class="mt-1 text-sm leading-snug text-slate-400">{m.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="mx-auto grid max-w-6xl gap-6 px-6 py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+        <div class="reveal">
+          <p class="eyebrow">{T.aboutEyebrow}</p>
+          <h2 class="section-heading">{T.aboutH}</h2>
+        </div>
+        <div class="reveal space-y-4">
+          {T.aboutP.map((para) => <p class="section-copy">{para}</p>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="border-t border-white/10">
+      <div class="mx-auto max-w-6xl px-6 py-20 lg:px-8">
+        <p class="eyebrow reveal">{T.skillsEyebrow}</p>
+        <h2 class="section-heading reveal">{T.skillsH}</h2>
+        <div class="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
+          {skillGroups(lang).map((group) => (
+            <div class="reveal border-t border-white/10 pt-5">
+              <h3 class="text-base font-semibold text-sky-300">{group.label}</h3>
+              <div class="mt-3 flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <span dir="auto" class="rounded-full bg-white/5 px-3 py-1.5 text-sm text-slate-200">{skill}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="border-t border-white/10">
+      <div class="mx-auto max-w-6xl px-6 py-20 lg:px-8">
+        <p class="eyebrow reveal">{T.projectsEyebrow}</p>
+        <h2 class="section-heading reveal">{T.projectsH}</h2>
+        <p class="section-copy reveal mt-3">{T.projectsNote}</p>
+        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <article class="reveal group flex flex-col rounded-2xl border border-white/10 bg-ink-800/70 p-6 transition hover:-translate-y-1 hover:border-sky-400/40">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">{project.category}</p>
+              <p dir="ltr" class="mt-4 inline-flex w-fit items-center gap-2 rounded-lg border border-sky-400/30 bg-sky-400/10 px-3 py-1.5 font-display text-lg font-bold text-sky-300" style="font-family:'Space Grotesk',Inter,sans-serif">
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2" /><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" /></svg>
+                {project.chip}
+              </p>
+              <h3 class="mt-4 text-xl font-semibold text-white">{project.title}</h3>
+              <ul class="mt-4 space-y-1.5 text-sm text-slate-300">
+                {project.specs.slice(0, 3).map((s) => (
+                  <li><span class="text-slate-500">{s.label}:</span> {s.value}</li>
+                ))}
+              </ul>
+              <div class="mt-5 flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
+                  <span dir="auto" class="rounded-full bg-white/5 px-2.5 py-1 text-xs text-slate-300">{tag}</span>
+                ))}
+              </div>
+              <a href={project.href} class="mt-auto pt-6 text-sm font-semibold text-sky-300 transition group-hover:text-sky-200">{T.readCase}<span class="sr-only"> {project.title}</span></a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab -->
+    <section id="lab" class="border-t border-white/10">
+      <div class="mx-auto max-w-6xl px-6 py-20 lg:px-8">
+        <p class="eyebrow reveal">{T.labEyebrow}</p>
+        <h2 class="section-heading reveal">{T.labH}</h2>
+        <div class="mt-10 grid gap-6 md:grid-cols-2">
+          {labItems.map((item) => (
+            <article class="reveal rounded-2xl border border-dashed border-white/15 p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">{item.status}</p>
+              <h3 class="mt-2 text-xl font-semibold text-white">{item.title}</h3>
+              <p class="mt-3 text-[0.98rem]">{item.body}</p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                {item.tags.map((tg) => <span dir="auto" class="rounded-full bg-white/5 px-2.5 py-1 text-xs text-slate-300">{tg}</span>)}
+              </div>
+              {item.href && <a href={item.href} class="mt-5 inline-block text-sm font-semibold text-sky-300 hover:text-sky-200">{T.readCase}</a>}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience & education -->
+    <section id="experience" class="border-t border-white/10">
+      <div class="mx-auto grid max-w-6xl gap-14 px-6 py-20 lg:grid-cols-2 lg:px-8">
+        <div>
+          <p class="eyebrow reveal">{T.expEyebrow}</p>
+          <h2 class="section-heading reveal">{T.expH}</h2>
+          <ol class="mt-8 space-y-8 border-s border-ink-500/60 ps-6">
+            {experience(lang).map((item) => (
+              <li class="reveal relative">
+                <span class="absolute -start-[1.95rem] top-1.5 h-3 w-3 rounded-full border-2 border-sky-400 bg-ink-900"></span>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-300">{item.period}</p>
+                <p class="mt-1 text-lg font-semibold text-white">{item.title}</p>
+                <p class="text-sm text-slate-400">{item.org}</p>
+                <p class="mt-2 text-[0.98rem]">{item.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div>
+          <p class="eyebrow reveal">{T.eduEyebrow}</p>
+          <h2 class="section-heading reveal">{T.eduH}</h2>
+          <ol class="mt-8 space-y-8 border-s border-ink-500/60 ps-6">
+            {education(lang).map((item) => (
+              <li class="reveal relative">
+                <span class="absolute -start-[1.95rem] top-1.5 h-3 w-3 rounded-full border-2 border-sky-400 bg-ink-900"></span>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-300">{item.period}</p>
+                <p class="mt-1 text-lg font-semibold text-white">{item.title}</p>
+                <p class="text-sm text-slate-400">{item.org}</p>
+                {item.body && <p class="mt-2 text-[0.98rem]">{item.body}</p>}
+              </li>
+            ))}
+          </ol>
+          <h3 class="reveal mt-12 text-lg font-semibold text-white">{T.certsH}</h3>
+          <ul class="mt-4 divide-y divide-white/10">
+            {certifications.map((c) => (
+              <li class="reveal flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
+                <div dir="ltr" class={lang === 'ar' ? 'text-right' : ''}>
+                  <p class="text-[0.95rem] font-medium text-slate-100">{c.title}</p>
+                  <p class="text-sm text-slate-400">{c.org} · {c.date}</p>
+                </div>
+                <a href={c.url} target="_blank" rel="noopener" class="text-sm font-semibold text-sky-300 hover:text-sky-200">{T.showCred}<span class="sr-only"> {c.title}</span></a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {testimonials.length > 0 && (
+      <section id="recommendations" class="border-t border-white/10">
+        <div class="mx-auto max-w-6xl px-6 py-20 lg:px-8">
+          <p class="eyebrow reveal">{T.recEyebrow}</p>
+          <h2 class="section-heading reveal">{T.recH}</h2>
+          <div class="mt-10 grid gap-6 md:grid-cols-2">
+            {testimonials.map((q) => (
+              <figure class="reveal border-s-2 border-sky-400/60 ps-5" dir="ltr">
+                <blockquote class="text-lg leading-relaxed text-slate-200">“{q.quote}”</blockquote>
+                <figcaption class="mt-3 text-sm text-slate-400"><span class="font-semibold text-slate-200">{q.name}</span> · {q.role}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Notes -->
+    <section id="notes" class="border-t border-white/10">
+      <div class="mx-auto max-w-6xl px-6 py-20 lg:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="eyebrow reveal">{T.notesEyebrow}</p>
+            <h2 class="section-heading reveal">{T.notesH}</h2>
+          </div>
+          <a href={lp(lang, '/notes')} class="reveal text-sm font-semibold text-sky-300 hover:text-sky-200">{T.allNotes}</a>
+        </div>
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {latestNotes.map((n) => (
+            <a href={lp(lang, `/notes/${n.slug}`)} class="reveal group block border-t border-white/10 pt-5">
+              <p class="text-xs uppercase tracking-[0.18em] text-slate-500">{n.tags.join(' · ')}</p>
+              <h3 class="mt-2 text-lg font-semibold text-white group-hover:text-sky-300">{n.title}</h3>
+              <p class="mt-2 text-[0.95rem]">{n.summary}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="border-t border-white/10">
+      <div class="mx-auto max-w-6xl px-6 py-20 lg:px-8">
+        <div class="reveal rounded-3xl border border-sky-400/25 bg-gradient-to-br from-sky-400/10 to-ink-800/80 p-8 lg:p-12">
+          <p class="eyebrow">{T.contactEyebrow}</p>
+          <h2 class="section-heading">{T.contactH}</h2>
+          <p class="section-copy mt-4">{T.contactP}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={`mailto:${contact.email}?subject=Hardware%20project`} class={`${btn} bg-sky-400 text-ink-900 hover:bg-sky-300`}>{T.emailMe}</a>
+            <a href={whatsappUrl(lang)} target="_blank" rel="noopener" class={`${btn} bg-[#25D366] text-slate-950 hover:bg-[#20bd5a]`}>
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm4.52 11.99c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+              {T.whatsapp}
+            </a>
+            <a href={contact.linkedin} class={`${btn} border border-white/15 text-slate-200 hover:bg-white/10`}>{T.messageLinkedIn}</a>
+            <a href={lp(lang, '/resume')} class={`${btn} border border-white/15 text-slate-200 hover:bg-white/10`}>{T.resume}</a>
+          </div>
+          <p class="mt-6 text-sm text-slate-400"><bdi>{contact.email}</bdi> · {T.whatsapp} <bdi dir="ltr">+20 10 15891738</bdi> · {T.contactMeta}</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

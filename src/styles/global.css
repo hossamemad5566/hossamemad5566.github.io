@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
 
 :root {
   color-scheme: dark;
@@ -65,4 +65,27 @@ p {
   background-repeat: no-repeat;
   background-position: right -120px top 40px;
   background-size: 900px auto;
+}
+
+/* Arabic (RTL) */
+[dir='rtl'] body,
+[dir='rtl'] h1,
+[dir='rtl'] h2,
+[dir='rtl'] h3,
+[dir='rtl'] .font-display {
+  font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif;
+  letter-spacing: 0;
+}
+[dir='rtl'] p {
+  line-height: 1.9;
+}
+/* Arabic letters must never be letter-spaced or upper-cased. */
+[dir='rtl'] .eyebrow,
+[dir='rtl'] [class*='tracking-'] {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+[dir='rtl'] .trace-bg {
+  background-position: left -120px top 40px;
+  transform: none;
 }

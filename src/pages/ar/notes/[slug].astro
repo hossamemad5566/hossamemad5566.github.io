@@ -1,0 +1,9 @@
+---
+import NotePage from '../../../components/NotePage.astro';
+import { notes } from '../../../data/notes';
+
+export function getStaticPaths() {
+  return notes.map((note) => ({ params: { slug: note.slug }, props: { note } }));
+}
+---
+<NotePage {...Astro.props} />

@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { notes } from '../data/notes';
+import { localizeNote } from '../data/notes.ar';
+import { getLang, lp, t } from '../i18n';
+
+const lang = getLang(Astro.url);
+const T = t(lang);
+const sorted = [...notes].sort((a, b) => b.date.localeCompare(a.date)).map((n) => localizeNote(n, lang));
+const fmt = (d: string) => new Date(d).toLocaleDateString(T.dateLocale, { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<Layout title={T.notesPageTitle} description={T.notesPageDesc}>
+  <main class="mx-auto max-w-3xl px-6 py-16 lg:px-8">
+    <p class="eyebrow">{T.notesEyebrow}</p>
+    <h1 class="mt-3 text-4xl font-bold text-white">{T.notesH}</h1>
+    <p class="mt-4 text-lg">{T.notesIntro}</p>
+    <ul class="mt-10 divide-y divide-white/10 border-y border-white/10">
+      {sorted.map((n) => (
+        <li class="reveal">
+          <a href={lp(lang, `/notes/${n.slug}`)} class="group block py-6">
+            <p class="text-xs uppercase tracking-[0.18em] text-slate-500">{fmt(n.date)} · {n.tags.join(' · ')}</p>
+            <h2 class="mt-2 text-xl font-semibold text-white group-hover:text-sky-300">{n.title}</h2>
+            <p class="mt-1">{n.summary}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>
