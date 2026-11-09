@@ -3,10 +3,12 @@ import '../styles/global.css';
 import '../styles/section.css';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import { goatcounterCode } from '../data/site';
 
 const {
   title = 'Hossam Emad | Hardware Engineer — PCB, BMS & Embedded Firmware',
   description = 'Hardware Engineer in Giza, Egypt: 4-layer PCB design, high-speed & RF layout, BMS, and FreeRTOS firmware for automotive and industrial IoT. Available for roles and freelance PCB design.',
+  type = 'website',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -20,11 +22,11 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#050816" />
+    <meta name="theme-color" content="#071220" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Hossam Emad" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -36,10 +38,29 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    {goatcounterCode && (
+      <script is:inline data-goatcounter={`https://${goatcounterCode}.goatcounter.com/count`} async src="//gc.zgo.at/count.js"></script>
+    )}
   </head>
-  <body>
+  <body id="top">
     <Navigation />
     <slot />
     <Footer />
+    <script>
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+          }),
+          { rootMargin: '0px 0px -8% 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
   </body>
 </html>

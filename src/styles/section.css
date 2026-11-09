@@ -1,19 +1,21 @@
-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 96px 24px;
-}
-
 .section-heading {
-  font-size: clamp(2.1rem, 2.8vw, 2.9rem);
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
   font-weight: 700;
-  margin-bottom: 1.1rem;
+  margin: 0.4rem 0 0;
   color: #f8fbff;
 }
 
 .section-copy {
-  font-size: 1.2rem;
-  line-height: 1.9;
+  font-size: 1.0625rem;
+  line-height: 1.75;
   color: #b3c1d6;
-  max-width: 760px;
+  max-width: 720px;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: #5fd4e8;
+  font-weight: 600;
 }
