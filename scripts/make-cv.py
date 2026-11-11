@@ -28,7 +28,7 @@ s.append(Paragraph('Hardware Engineer with 2+ years of hands-on experience in ha
 s+=sec('TECHNICAL SKILLS')
 for k,v in [('Firmware &amp; Software','Embedded C (production-grade), Python (prototyping &amp; validation), RTOS (FreeRTOS), SMS/MQTT/HTTP, GPS data processing, FOTA, Geofencing algorithms, Embedded debugging, Root-cause analysis'),
 ('Hardware &amp; PCB','Multi-layer PCB design (up to 4 layers), Stackup planning &amp; controlled impedance routing (USB, CAN, RF, Ethernet), High-speed design, EMI mitigation (ground stitching, return path optimization), RF subsystem design (antenna placement &amp; impedance matching), Power electronics, Battery Management Systems (BMS — 3-cell), Board bring-up, soldering &amp; field debugging, Full manufacturing file preparation (Gerber, BOM, CPL), Fab coordination (JLCPCB)'),
-('Protocols &amp; Interfaces','CAN (High-Speed, SWCAN, scanning), USB, UART/SPI/I2C, RS232/RS485, Ethernet (W5500, ENC28J60), Wi-Fi/BLE, 4G (SIMCom), ADC/GPIO'),
+('Protocols &amp; Interfaces','CAN (High-Speed, SWCAN, scanning), USB, UART/SPI/I2C, RS232/RS485, Ethernet (W5500, ENC28J60), Camera DVP, Wi-Fi/BLE, 4G (SIMCom), ADC/GPIO'),
 ('System &amp; Product Engineering','Full product lifecycle ownership (concept → design → manufacturing → deployment), Reverse engineering &amp; hardware redesign, Mechanical integration &amp; enclosure selection, Automotive telematics &amp; Industrial IoT gateways'),
 ('Tools','Altium Designer (advanced schematic &amp; layout, actively upskilling), EAGLE, EasyEDA Pro, KiCad, Autodesk Fusion 360, LTspice, MATLAB/Simulink, JLCPCB manufacturing')]:
     s.append(Paragraph(f'<b>{k}:</b> {v}',P))
@@ -71,15 +71,18 @@ s+=proj('Industrial IoT Controller &amp; Hardware Development Platform',[
 'Designed the complete multi-sheet schematic, PCB layout, power architecture, and protection circuitry using KiCad.',
 'Implemented high-speed interfaces including Ethernet, CAN, RS-485, USB, SPI, and QSPI.',
 'Performed PCB fabrication review, assembly, firmware flashing, hardware bring-up, debugging, and system validation.'])
-s.append(Spacer(1,4))
+s.append(Spacer(1,2))
 s.append(Paragraph('<b>Freelance Hardware Designer</b> <i>Oct 2026 – Present</i>',P))
 s.append(Paragraph('<i>Remote — client projects</i>',B))
+s+=proj('Delivery Secure Box (VAULTIQ) — Smart Parcel Locker Controller',[
+'Designed a 4-layer, 100 × 76 mm ESP32-S3 controller in KiCad 10 that photographs every delivery over a 24-pin DVP camera (OV2640/OV3660/OV5640), reports over ENC28J60 10BASE-T Ethernet or Wi-Fi, and drives a 12 V solenoid lock.',
+'Built a protected 12 V input (TVS, reverse-polarity, PTC) and a 12 → 5 → 3.3 V power tree (TPS54360, SY8089A) with dedicated low-noise SGM2036 camera LDOs; validated the camera circuit pin-by-pin against Seeed\'s XIAO ESP32S3 reference.',
+'Specified the JLC04161H-3313 controlled-impedance stack-up, sized 100 Ω Ethernet pairs with a 2D field solver, and wrote a custom DRC rule set (diff-pair geometry/skew, camera clock isolation, bus length/via limits, rail widths).',
+'Added industrial I/O (PCA9554 keypad/LED expander, opto-isolated proximity input, flyback-protected relay driver); pre-fab review caught a core-voltage error, an LDO sourcing error and an antenna-keepout gap.'])
 s+=proj('ESP32-C6 + W5500 Ethernet Node — Client Board Design',[
-'Architected a compact ESP32-C6-WROOM-1 node with WIZnet W5500 hardwired TCP/IP Ethernet on the IO_MUX SPI pins (interrupt-driven RX), native USB-C flashing/JTAG, JST I²C, user keys/LEDs, and a UART programming header — all connectors on one board edge.',
-'Designed a protected dual 5 V input (USB-C + screw terminal) with polyfuse, TVS, Schottky ORing, and a 3.3 V LDO sized for a ~525 mA peak budget (Wi-Fi TX + 100M Ethernet).',
-'Derived the Ethernet front end from the WIZnet reference (49.9 Ω MDI termination, 25 MHz crystal, AVDD ferrite filtering, integrated-magnetics RJ45, isolated chassis ground) and resolved ESP32-C6 strapping-pin and boot-timing constraints.',
-'Wrote design notes with pin map, power budget, and schematic/layout review checklists (100 Ω Ethernet / 90 Ω USB differential pairs, antenna keep-out); released the hierarchical KiCad schematic and BOM; PCB layout in progress.'])
-s.append(Spacer(1,4))
+'Architected an ESP32-C6-WROOM-1 node with W5500 hardwired TCP/IP Ethernet on IO_MUX SPI, native USB-C, JST I²C and a protected dual 5 V input (fuse, TVS, ORing, 3.3 V LDO), all connectors on one edge.',
+'Wrote design notes and review checklists (strapping pins, antenna keep-out, 100 Ω / 90 Ω pairs); released the hierarchical KiCad schematic and BOM; PCB layout in progress.'])
+s.append(Spacer(1,2))
 s.append(Paragraph('<b>Embedded Systems Engineer</b> <i>Jan 2024 – Feb 2024</i>',P))
 s.append(Paragraph('<i>Noziqs Medical — Nasr City (Short-term contract engagement)</i>',B))
 s.append(bl(['Developed embedded firmware for operating tables, improving system functionality by 30%.','Reduced device downtime by 20% via board-level troubleshooting and root-cause analysis.']))
@@ -97,5 +100,5 @@ for t,dsc in [('High-Speed Board Design — System on Module (EsteemPCB) — Ude
     if dsc: s.append(Paragraph(dsc,B))
 s+=sec('LANGUAGES')
 s.append(Paragraph('English — Professional Proficiency',B))
-doc=SimpleDocTemplate('public/Hossam_Emad_Mohamed_Osman.pdf',pagesize=letter,leftMargin=44,rightMargin=44,topMargin=30,bottomMargin=24,title='Hossam Emad Mohamed Osman — CV',author='Hossam Emad Mohamed Osman')
+doc=SimpleDocTemplate('public/Hossam_Emad_Mohamed_Osman.pdf',pagesize=letter,leftMargin=44,rightMargin=44,topMargin=28,bottomMargin=22,title='Hossam Emad Mohamed Osman — CV',author='Hossam Emad Mohamed Osman')
 doc.build(s)
