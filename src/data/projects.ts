@@ -164,8 +164,8 @@ export const allProjects: Project[] = [
     summary: 'A 4-layer ESP32-S3 controller for a smart parcel locker that captures a photo of every delivery over a DVP camera, reports over wired Ethernet or Wi-Fi, and drives a 12 V solenoid lock.',
     tags: ['ESP32-S3', 'Camera DVP', 'Ethernet', '4-layer PCB', 'Controlled impedance', 'KiCad', 'Power design', 'IoT'],
     href: p('delivery-secure-box'),
-    image: '/images/projects/delivery-secure-box/hero.webp',
-    images: ['/images/projects/delivery-secure-box/hero.webp'],
+    image: '/images/projects/delivery-secure-box/diagram.svg',
+    images: ['/images/projects/delivery-secure-box/diagram.svg'],
     specs: [
       { label: 'MCU', value: 'ESP32-S3-WROOM-1 (Wi-Fi + BLE 5), octal PSRAM' },
       { label: 'Camera', value: '24-pin DVP FPC, OV2640 / OV3660 / OV5640, 8-bit, XCLK 20 MHz' },
